@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    input[type="checkbox"] {
+      transform: scale(1.5);
+      padding: 10px;
+    }
+    input[type="radio"] {
+      transform: scale(1.5);
+      padding: 50px;
+    }
+  </style>
+
+  <div id="vpInfo">
+    <script>
+      storeData = function () {
+        "use strict";
+
+        // age
+        let age = document.getElementById("age").value;
+
+        // gender
+        let gender_m = document.getElementById("male").checked;
+        let gender_f = document.getElementById("female").checked;
+        let gender_d = document.getElementById("divers").checked;
+        let gender = "";
+        if (gender_m) {
+          gender = "male";
+        } else if (gender_f) {
+          gender = "female";
+        } else if (gender_d) {
+          gender = "na";
+        }
+
+        // handedness
+        let hand_l = document.getElementById("left").checked;
+        let hand_r = document.getElementById("right").checked;
+        let hand = "";
+        if (hand_l) {
+          hand = "left";
+        } else if (hand_r) {
+          hand = "right";
+        }
+
+        // consent
+        let consent = document.getElementById("consent_checkbox").checked;
+
+        // check completed
+        if (consent && age !== "" && gender !== "" && hand !== "") {
+          parent.finishedHTML = true;
+          parent.form_data = { age: age, gender: gender, handedness: hand };
+          return true;
+        } else {
+          window.alert("Please answer all questions and click the consent box to continue!");
+          return false;
+        }
+      };
+    </script>
+    <h1><b>Experiment</b></h1>
+    <h2><b>Age?</b></h2>
+    <input type="number" id="age" min="18" max="50" value="" /><label for="age"> </label> <br /><br />
+    <h2><b>Gender?</b></h2>
+    <label for="male"></label><input type="radio" name="gender" id="male" /><label style="font-size: 24px;">
+      Male
+    </label>
+    <label for="female"></label><input type="radio" name="gender" id="female" /><label style="font-size: 24px;">
+      Female
+    </label>
+    <input type="radio" name="gender" id="divers" /><label for="divers"> </label> <label style="font-size: 24px;"> NA </label> <br /><br />
+    <h2><b>Handedness?</b></h2>
+    <input type="radio" name="handedness" id="left" /><label for="left"> </label> <label style="font-size: 24px;"> Left </label>
+    <input type="radio" name="handedness" id="right" /><label for="right"> </label> <label style="font-size: 24px;"> Right </label>
+    <br /><br /><br /><br />
+    <input type="checkbox" id="consent_checkbox" class="checkboxtext" /><label for="consent_checkbox"> </label>
+    <label style="font-size: 30px;"> I agree to take part in this study. </label><br /><br /><br /><br />
+    <button type="button" id="start" onclick="storeData()" style="width: 200px; height: 50px;" />
+    <label style="font-size: 30px;"> Start </label>
+  </div>
+</html>
