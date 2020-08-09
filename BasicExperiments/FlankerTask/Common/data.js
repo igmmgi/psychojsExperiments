@@ -1,5 +1,5 @@
-import { Scheduler } from "../lib/util-2020.1.js";
-import { mean } from "./utils.js";
+import { Scheduler } from '../lib/util-2020.1.js';
+import { mean } from './utils.js';
 
 export class Data {
   constructor(expName, dirName) {
@@ -19,7 +19,7 @@ export class Data {
   }
 
   setFileName() {
-    return this.dirName + "/data/" + this.expName + "_" + this.vpNum;
+    return this.dirName + '/data/' + this.expName + '_' + this.vpNum;
   }
 
   initData(nblks, ntrls) {
@@ -56,7 +56,7 @@ export class Data {
     }
   }
 
-  calculateMeanBlkRt(blk, rtkey = "rt") {
+  calculateMeanBlkRt(blk, rtkey = 'rt') {
     let rts = [];
     let rt;
     for (let i in this.data[blk]) {
@@ -68,7 +68,7 @@ export class Data {
     return Math.round(mean(rts) * 1000);
   }
 
-  calculateMeanBlkErr(blk, errkey = "corrCode", corrVal = 1) {
+  calculateMeanBlkErr(blk, errkey = 'corrCode', corrVal = 1) {
     let dat = this.getDataBlk(blk, false);
     let nerr = 0;
     let err;
@@ -105,14 +105,14 @@ export class Data {
   saveData() {
     let dictcsv = this._JSON2CSV(this.data);
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", "../Common/write_data.php");
-    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.open('POST', '../Common/write_data.php');
+    xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify({ filename: this.datFileName, filedata: dictcsv }));
   }
 
   saveRandomCode(url) {
     $.ajax({
-      type: "post",
+      type: 'post',
       cache: false,
       url: url,
       data: { filename: this.datFileName, filedata: this.randomString },
@@ -120,24 +120,24 @@ export class Data {
   }
 
   generateRandomString(length = 16) {
-    let chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    let randomString = "";
+    let chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let randomString = '';
     for (let i = length; i > 0; --i) randomString += chars[Math.round(Math.random() * (chars.length - 1))];
     return randomString;
   }
 
   // adapted from jsPsych
   _JSON2CSV(objArray) {
-    let array = typeof objArray != "object" ? JSON.parse(objArray) : objArray;
+    let array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
     array = [].concat.apply([], array);
-    let line = "";
-    let result = "";
+    let line = '';
+    let result = '';
     let columns = [];
 
     let i = 0;
     for (let j = 0; j < array.length; j++) {
       for (let key in array[j]) {
-        let keyString = key + "";
+        let keyString = key + '';
         keyString = '"' + keyString.replace(/"/g, '""') + '",';
         if (!columns.includes(key)) {
           columns[i] = key;
@@ -148,18 +148,18 @@ export class Data {
     }
 
     line = line.slice(0, -1);
-    result += line + "\r\n";
+    result += line + '\r\n';
 
     for (let i = 0; i < array.length; i++) {
-      let line = "";
+      let line = '';
       for (let j = 0; j < columns.length; j++) {
-        let value = typeof array[i][columns[j]] === "undefined" ? "" : array[i][columns[j]];
-        let valueString = value + "";
+        let value = typeof array[i][columns[j]] === 'undefined' ? '' : array[i][columns[j]];
+        let valueString = value + '';
         line += '"' + valueString.replace(/"/g, '""') + '",';
       }
 
       line = line.slice(0, -1);
-      result += line + "\r\n";
+      result += line + '\r\n';
     }
 
     return result;
