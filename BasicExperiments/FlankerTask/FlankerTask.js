@@ -105,7 +105,6 @@ function setFlankerStim(text) {
 }
 
 function codeTrial() {
-<<<<<<< HEAD
   return function () {
     let dat = data.getDataBlkTrl(data.cblk, data.ctrl, false);
     let key = keyboard.keyName;
