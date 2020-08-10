@@ -1,6 +1,6 @@
-import { Scheduler } from "../lib/util-2020.1.js";
-import * as util from "../lib/util-2020.1.js";
-import { psychoJS } from "../Common/setup.js";
+import { Scheduler } from '../lib/util-2020.1.js';
+import * as util from '../lib/util-2020.1.js';
+import { psychoJS } from '../Common/setup.js';
 
 export const expTimer = new util.Clock();
 export const trlTimer = new util.Clock();

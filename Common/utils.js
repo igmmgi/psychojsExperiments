@@ -1,11 +1,11 @@
-import { Scheduler } from "../lib/util-2020.1.js";
+import { Scheduler } from '../lib/util-2020.1.js';
 
 export function hideMouse(hide) {
   return function () {
     if (hide) {
-      $("body").css("cursor", "none");
+      $('body').css('cursor', 'none');
     } else {
-      $("body").css("cursor", "default");
+      $('body').css('cursor', 'default');
     }
     return Scheduler.Event.NEXT;
   };
@@ -15,7 +15,7 @@ export function getNumberOfFiles(url, datDir) {
   let numDataFiles = 0;
   $.ajax({
     url: url,
-    type: "POST",
+    type: 'POST',
     async: false,
     data: { dir: datDir },
   }).done(function (data) {

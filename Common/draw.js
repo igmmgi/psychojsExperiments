@@ -1,4 +1,4 @@
-import { Scheduler } from "../lib/util-2020.1.js";
+import { Scheduler } from '../lib/util-2020.1.js';
 
 export function draw(components) {
   return function () {
