@@ -132,44 +132,6 @@ function blockFeedbackText() {
     data.cblk++;
     return Scheduler.Event.NEXT;
   };
-=======
-    return function () {
-        let dat = data.getDataBlkTrl(data.cblk, data.ctrl, false);
-        let key = keyboard.keyName;
-        let corrCode;
-        if (key === dat.corrKey) {
-            corrCode = 1;
-            feedbackTxt.text = prms.fbTxt[0];
-        } else {
-            corrCode = 2;
-            feedbackTxt.text = prms.fbTxt[1];
-        }
-        data.addDataBlkTrl(data.cblk, data.ctrl, { corrCode: corrCode, rt: keyboard.rt });
-        data.ctrl++;
-        return Scheduler.Event.NEXT;
-    };
-}
-
-function blockFeedbackText() {
-    return function () {
-        let blkRt = data.calculateMeanBlkRt(data.cblk, 'rt');
-        let blkErr = data.calculateMeanBlkErr(data.cblk, 'corrCode', 1);
-        blockTxt.text =
-            'Block ' +
-            (data.cblk + 1) +
-            ' of ' +
-            prms.nBlks +
-            '\n\nMean RT: ' +
-            blkRt +
-            ' ms\n\nError Rate: ' +
-            blkErr +
-            ' %' +
-            '\n\n\nPress the spacebar to continue!';
-        data.ctrl = 0;
-        data.cblk++;
-        return Scheduler.Event.NEXT;
-    };
->>>>>>> bb7b8e027e2d47116cd7f76b4e5a744b82a6db3b
 }
 
 function singleFlankerTrial(text) {
