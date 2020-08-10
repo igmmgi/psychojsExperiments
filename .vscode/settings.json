@@ -1,0 +1,5 @@
+{
+    "phpserver.browser": "firefox",
+    "editor.fontFamily": "FiraCode Nerd Font", 
+    "editor.fontLigatures":  true
+}

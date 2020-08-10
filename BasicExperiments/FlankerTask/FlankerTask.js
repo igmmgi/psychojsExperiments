@@ -105,6 +105,35 @@ function setFlankerStim(text) {
 }
 
 function codeTrial() {
+<<<<<<< HEAD
+  return function () {
+    let dat = data.getDataBlkTrl(data.cblk, data.ctrl, false);
+    let key = keyboard.keyName;
+    let corrCode = key === dat.corrKey ? 1 : 2;
+    feedbackTxt.text = prms.fbTxt[corrCode - 1];
+    data.addDataBlkTrl(data.cblk, data.ctrl, {
+      corrCode: corrCode,
+      rt: keyboard.rt,
+    });
+    data.ctrl++;
+    return Scheduler.Event.NEXT;
+  };
+}
+
+function blockFeedbackText() {
+  return function () {
+    let blkRt = data.calculateMeanBlkRt(data.cblk, "rt");
+    let blkErr = data.calculateMeanBlkErr(data.cblk, "corrCode", 1);
+    blockTxt.text =
+      "Block " + (data.cblk + 1) + " of " + prms.nBlks + "\n\n" +
+      "Mean RT: " + blkRt + " ms\n\n" +
+      "Error Rate: " + blkErr + " %\n\n\n" +
+      "Press the spacebar to continue!";
+    data.ctrl = 0;
+    data.cblk++;
+    return Scheduler.Event.NEXT;
+  };
+=======
     return function () {
         let dat = data.getDataBlkTrl(data.cblk, data.ctrl, false);
         let key = keyboard.keyName;
@@ -141,6 +170,7 @@ function blockFeedbackText() {
         data.cblk++;
         return Scheduler.Event.NEXT;
     };
+>>>>>>> bb7b8e027e2d47116cd7f76b4e5a744b82a6db3b
 }
 
 function singleFlankerTrial(text) {
@@ -205,7 +235,7 @@ expScheduler.add(waitKey(['space']));
 expScheduler.add(clear(textInstructions));
 expScheduler.add(resetTrlTimer());
 expScheduler.add(timeInterval(prms.waitDur));
-
+    
 // Blocks of flanker stimuli separated by break with performance feedback
 for (let blk = 0; blk < prms.nBlks; blk++) {
     let reps = blk === 0 ? prms.nTrlsP / conditions.length : prms.nTrlsE / conditions.length;
