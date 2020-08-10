@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
   <style>
     input[type="checkbox"] {
       transform: scale(1.5);
@@ -12,7 +13,9 @@
   </style>
 
   <div id="vpInfo">
+
     <script>
+
       storeData = function () {
         "use strict";
 
@@ -20,25 +23,20 @@
         let age = document.getElementById("age").value;
 
         // gender
-        let gender_m = document.getElementById("male").checked;
-        let gender_f = document.getElementById("female").checked;
-        let gender_d = document.getElementById("divers").checked;
         let gender = "";
-        if (gender_m) {
+        if (document.getElementById("male").checked) {
           gender = "male";
-        } else if (gender_f) {
+        } else if (document.getElementById("female").checked) {
           gender = "female";
-        } else if (gender_d) {
+        } else if (document.getElementById("divers").checked) {
           gender = "na";
         }
 
         // handedness
-        let hand_l = document.getElementById("left").checked;
-        let hand_r = document.getElementById("right").checked;
         let hand = "";
-        if (hand_l) {
+        if (document.getElementById("left").checked) {
           hand = "left";
-        } else if (hand_r) {
+        } else if (document.getElementById("right").checked) {
           hand = "right";
         }
 
@@ -55,7 +53,9 @@
           return false;
         }
       };
+
     </script>
+
     <h1><b>Experiment</b></h1>
     <h2><b>Age?</b></h2>
     <input type="number" id="age" min="18" max="50" value="" /><label for="age"> </label> <br /><br />
@@ -73,7 +73,6 @@
     <br /><br /><br /><br />
     <input type="checkbox" id="consent_checkbox" class="checkboxtext" /><label for="consent_checkbox"> </label>
     <label style="font-size: 30px;"> I agree to take part in this study. </label><br /><br /><br /><br />
-    <button type="button" id="start" onclick="storeData()" style="width: 200px; height: 50px;" />
-    <label style="font-size: 30px;"> Start </label>
+    <button type="button" id="start" onclick="storeData()" style="width: 200px; height: 50px; font-size: 30px; "> Start </button> 
   </div>
 </html>

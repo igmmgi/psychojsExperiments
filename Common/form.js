@@ -4,9 +4,7 @@ export class Form {
   setup(form) {
     return function () {
       $("body").append(
-        '<iframe id="iframe" src="' +
-          form +
-          '" frameborder = "0" scrolling="no" style="width: 15%; height: 50%; position:absolute; left:50%; top:30%;"></iframe>'
+        `<iframe id="iframe" src="${form}" style="border-style:none; overflow: hidden; width: 100%; height: 100%; position:absolute; left:40%; top:20%;"></iframe>`
       );
       return Scheduler.Event.NEXT;
     };

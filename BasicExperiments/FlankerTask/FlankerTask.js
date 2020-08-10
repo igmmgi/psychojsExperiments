@@ -1,17 +1,18 @@
 ////////////////////////////////////////////////////////////////////////
 //                      Basic Flanker Experiment                      //
 ////////////////////////////////////////////////////////////////////////
-import { Scheduler } from './lib/util-2020.1.js';
-import * as util from './lib/util-2020.1.js';
-import * as visual from './lib/visual-2020.1.js';
+import { Scheduler } from '../../lib/util-2020.1.js';
+import * as util from '../../lib/util-2020.1.js';
+import * as visual from '../../lib/visual-2020.1.js';
 
-import { Data, saveData } from './Common/data.js';
-import { Form } from './Common/form.js';
-import { psychoJS, startgui, expScheduler, quitPsychoJS } from './Common/setup.js';
-import { shuffle, hideMouse } from './Common/utils.js';
-import { keyboard, waitKey } from './Common/response.js';
-import { timeInterval, resetTrlTimer } from './Common/timer.js';
-import { draw, clear } from './Common/draw.js';
+import { Data, saveData } from '../../Common/data.js';
+import { Form } from '../../Common/form.js';
+import { psychoJS, startgui, expScheduler, quitPsychoJS } from '../../Common/setup.js';
+import { shuffle, hideMouse } from '../../Common/utils.js';
+import { keyboard, waitKey } from '../../Common/response.js';
+import { timeInterval, resetTrlTimer } from '../../Common/timer.js';
+import { draw, clear } from '../../Common/draw.js';
+
 
 const prms = {
     nTrlsP: 4, // number of trials in first block (practice)
@@ -179,7 +180,7 @@ let conditions = [
 expScheduler.add(startgui());
 
 // Participant information
-expScheduler.add(form.setup('forms/vp_info_basic.html'));
+expScheduler.add(form.setup('../../forms/vp_info_basic.html'));
 expScheduler.add(form.display(data));
 
 // Welcome Screen
