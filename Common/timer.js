@@ -21,3 +21,7 @@ export function resetTrlTimer() {
     return Scheduler.Event.NEXT;
   };
 }
+
+export function timestamp() {
+  return util.MonotonicClock.getDateStr();
+}

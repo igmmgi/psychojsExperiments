@@ -10,7 +10,7 @@ import { Form } from '../../Common/form.js';
 import { psychoJS, startgui, expScheduler, quitPsychoJS } from '../../Common/setup.js';
 import { shuffle, hideMouse } from '../../Common/utils.js';
 import { keyboard, waitKey } from '../../Common/response.js';
-import { timeInterval, resetTrlTimer } from '../../Common/timer.js';
+import { timeInterval, resetTrlTimer, expTimer, timestamp } from '../../Common/timer.js';
 import { draw, clear } from '../../Common/draw.js';
 
 const prms = {
@@ -25,13 +25,6 @@ const prms = {
   fbTxt: ['Correct', 'Error'],
 };
 
-// data
-let data = new Data('FlankerTask', '/home/ian/Documents/JavaScript/psychojsExperiments/BasicExperiments/FlankerTask/');
-data.initData(prms.nBlks, prms.nTrlsE);
-data.addData({ vp: data.vpNum });
-
-let form = new Form();
-
 // open window:
 psychoJS.openWindow({
   fullscr: true,
@@ -39,6 +32,10 @@ psychoJS.openWindow({
   units: 'height',
   waitBlanking: true,
 });
+
+// data
+let data = new Data('FlankerTask', '/home/ian/Documents/JavaScript/psychojsExperiments/BasicExperiments/FlankerTask/');
+data.initData(prms.nBlks, prms.nTrlsE);
 
 // psychoPy Visual Stimuli
 const textWelcome = new visual.TextStim({
@@ -111,8 +108,10 @@ function codeTrial() {
     let corrCode = key === dat.corrKey ? 1 : 2;
     feedbackTxt.text = prms.fbTxt[corrCode - 1];
     data.addDataBlkTrl(data.cblk, data.ctrl, {
+      date: timestamp(),
       corrCode: corrCode,
       rt: keyboard.rt,
+      save: true,
     });
     data.ctrl++;
     return Scheduler.Event.NEXT;
@@ -187,6 +186,7 @@ let conditions = [
 expScheduler.add(startgui());
 
 // Participant information
+let form = new Form();
 expScheduler.add(form.setup('../../forms/vp_info_basic.html'));
 expScheduler.add(form.display(data));
 

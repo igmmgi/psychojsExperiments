@@ -1,5 +1,7 @@
 import { Scheduler } from '../lib/util-2020.1.js';
+import { psychoJS } from './setup.js';
 import { mean } from './utils.js';
+import { timestamp } from './timer.js';
 
 export class Data {
   constructor(expName, dirName) {
@@ -24,10 +26,26 @@ export class Data {
 
   initData(nblks, ntrls) {
     this.data = [];
+    let os = window.navigator.platform;
+    let framerate = psychoJS.window.getActualFrameRate();
+    let browser = psychoJS.window._psychoJS._browser;
+    let xres = psychoJS.window._size[0];
+    let yres = psychoJS.window._size[1];
     for (let blk = 0; blk < nblks; blk++) {
       this.data.push([]);
       for (let trl = 0; trl < ntrls; trl++) {
-        this.data[blk].push({ blk: blk + 1, trl: trl + 1 });
+        this.data[blk].push({
+          expName: this.expName,
+          vpNum: this.vpNum,
+          date: timestamp(),
+          os: os,
+          browser: browser,
+          framerate: framerate,
+          xres: xres,
+          yres: yres,
+          blk: blk + 1,
+          trl: trl + 1,
+        });
       }
     }
   }
@@ -105,7 +123,7 @@ export class Data {
   saveData() {
     let dictcsv = this._JSON2CSV(this.data);
     let xhr = new XMLHttpRequest();
-    xhr.open('POST', '../Common/write_data.php');
+    xhr.open('POST', '../../Common/write_data.php');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify({ filename: this.datFileName, filedata: dictcsv }));
   }
@@ -122,7 +140,9 @@ export class Data {
   generateRandomString(length = 16) {
     let chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     let randomString = '';
-    for (let i = length; i > 0; --i) randomString += chars[Math.round(Math.random() * (chars.length - 1))];
+    for (let i = length; i > 0; --i) {
+      randomString += chars[Math.round(Math.random() * (chars.length - 1))];
+    }
     return randomString;
   }
 
@@ -130,6 +150,14 @@ export class Data {
   _JSON2CSV(objArray) {
     let array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
     array = [].concat.apply([], array);
+
+    array = array.filter(function (x) {
+      return x.save === true;
+    });
+    for (let i = 0; i < array.length; i++) {
+      delete array[i].save;
+    }
+
     let line = '';
     let result = '';
     let columns = [];

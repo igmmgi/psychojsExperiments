@@ -15,7 +15,6 @@ export class Form {
       while (!window.finishedHTML) {
         return Scheduler.Event.FLIP_REPEAT;
       }
-
       data.addData(window.form_data);
       $('#iframe').remove();
       return Scheduler.Event.NEXT;
