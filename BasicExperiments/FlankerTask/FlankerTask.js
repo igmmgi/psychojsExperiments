@@ -184,7 +184,6 @@ let conditions = [
 
 // Create Experiment Sequence
 expScheduler.add(startgui());
-expScheduler.add(a);
 
 // Participant information
 let form = new Form();
