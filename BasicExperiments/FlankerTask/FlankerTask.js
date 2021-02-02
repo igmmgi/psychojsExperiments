@@ -49,12 +49,7 @@ const textWelcome = new visual.TextStim({
 const textInstructions = new visual.TextStim({
   win: psychoJS.window,
   name: 'textInstructions',
-  text:
-    'Respond to the direction of the central arrow by pressing the ' +
-    prms.respKeys[0] +
-    ' (left) or ' +
-    prms.respKeys[1] +
-    ' (right) key.\n\nPress the spacebar to continue!',
+  text: `Respond to the direction of the central arrow by pressing the ${prms.respKeys[0].toUpperCase()} (left index finger) or ${prms.respKeys[0].toUpperCase()} (right index finger) key. \n\nPress the spacebar to continue!`,
   height: 0.05,
   wrapWidth: 1.5,
 });
@@ -122,19 +117,9 @@ function blockFeedbackText() {
   return function () {
     let blkRt = data.calculateMeanBlkRt(data.cblk, 'rt');
     let blkErr = data.calculateMeanBlkErr(data.cblk, 'corrCode', 1);
-    blockTxt.text =
-      'Block ' +
-      (data.cblk + 1) +
-      ' of ' +
-      prms.nBlks +
-      '\n\n' +
-      'Mean RT: ' +
-      blkRt +
-      ' ms\n\n' +
-      'Error Rate: ' +
-      blkErr +
-      ' %\n\n\n' +
-      'Press the spacebar to continue!';
+    blockTxt.text = `Block ${data.cblk + 1} of ${
+      prms.nBlks
+    } \n\nMean RT: ${blkRt} ms \n\nError Rate: ${blkErr} %\n\n\Press the sapcebar to continue!`;
     data.ctrl = 0;
     data.cblk++;
     return Scheduler.Event.NEXT;
@@ -175,11 +160,12 @@ function presentBlockText() {
   expScheduler.add(timeInterval(prms.waitDur));
 }
 
+// prettier-ignore
 let conditions = [
-  { text: '<<<<<', comp: 'comp', respDir: 'left', corrKey: prms.respKeys[0] },
-  { text: '>>>>>', comp: 'comp', respDir: 'right', corrKey: prms.respKeys[1] },
+  { text: '<<<<<', comp: 'comp',   respDir: 'left',  corrKey: prms.respKeys[0] },
+  { text: '>>>>>', comp: 'comp',   respDir: 'right', corrKey: prms.respKeys[1] },
   { text: '<<><<', comp: 'incomp', respDir: 'right', corrKey: prms.respKeys[1] },
-  { text: '>><>>', comp: 'incomp', respDir: 'left', corrKey: prms.respKeys[0] },
+  { text: '>><>>', comp: 'incomp', respDir: 'left',  corrKey: prms.respKeys[0] },
 ];
 
 // Create Experiment Sequence
