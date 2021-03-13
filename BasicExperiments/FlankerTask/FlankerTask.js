@@ -10,7 +10,7 @@ import { Form } from '../../Common/form.js';
 import { psychoJS, startgui, expScheduler, quitPsychoJS } from '../../Common/setup.js';
 import { shuffle, hideMouse } from '../../Common/utils.js';
 import { keyboard, waitKey } from '../../Common/response.js';
-import { timeInterval, resetTrlTimer, expTimer, timestamp } from '../../Common/timer.js';
+import { timeInterval, resetTrlTimer, timestamp } from '../../Common/timer.js';
 import { draw, clear } from '../../Common/draw.js';
 
 const prms = {
@@ -49,7 +49,7 @@ const textWelcome = new visual.TextStim({
 const textInstructions = new visual.TextStim({
   win: psychoJS.window,
   name: 'textInstructions',
-  text: `Respond to the direction of the central arrow by pressing the ${prms.respKeys[0].toUpperCase()} (left index finger) or ${prms.respKeys[0].toUpperCase()} (right index finger) key. \n\nPress the spacebar to continue!`,
+  text: `Respond to the direction of the central arrow by pressing the ${prms.respKeys[0].toUpperCase()} (left index finger) or ${prms.respKeys[1].toUpperCase()} (right index finger) key. \n\nPress the spacebar to continue!`,
   height: 0.05,
   wrapWidth: 1.5,
 });
@@ -133,7 +133,7 @@ function singleFlankerTrial(text) {
   expScheduler.add(timeInterval(prms.fixDur));
   expScheduler.add(clear(fixationCross));
 
-  // flanker stimmulus until key response
+  // flanker stimulus until key response
   expScheduler.add(setFlankerStim(text));
   expScheduler.add(draw(stimFlanker));
   expScheduler.add(waitKey());
@@ -171,10 +171,10 @@ let conditions = [
 // Create Experiment Sequence
 expScheduler.add(startgui());
 
-// Participant information
-let form = new Form();
-expScheduler.add(form.setup('../../forms/vp_info_basic.html'));
-expScheduler.add(form.display(data));
+// // Participant information
+// let form = new Form();
+// expScheduler.add(form.setup('../../forms/vp_info_basic.html'));
+// expScheduler.add(form.display(data));
 
 // Welcome Screen
 expScheduler.add(hideMouse(true));
